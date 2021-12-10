@@ -1,0 +1,19 @@
+button#formButton {
+    margin-top: 20%;
+    margin-left: 3%;
+
+}
+
+form#form1{
+    padding: 15px;
+    border: 1px solid #666;
+    background: #fff;
+    display: none;
+    margin-top: 5%;
+}
+
+/* #formButton {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  } */
