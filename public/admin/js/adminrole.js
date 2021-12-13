@@ -4,20 +4,20 @@ $(document).ready(function() {
     });
 });
 
-
-
 $(document).ready(function(){
-    $("#formSubmit").click(function(){ 
+    $("#editAdmin").click(function(stay){ 
        jQuery.ajax({
-            url:"org.userupdate",
+            url:"editAdmin",
             type: "get",
             data: $(this).serialize(),
-            success:function(data){  
+            success:function(data){  alert(1);
+                $("#form1").show();
             } 
         });
         stay.preventDefault(); 
     });
-    // +++++++++++++++ For Image ++++++++++++++++
+   
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-= [ For Image ] =-=-=-=-=-=-=-=-=--=-=-=-=
     $('#image').change(function(){
         let reader = new FileReader();
         reader.onload = (e) => { 
@@ -26,8 +26,8 @@ $(document).ready(function(){
         reader.readAsDataURL(this.files[0]); 
     });
 
-    // +++++++++++++++++ Update Data +++++++++++++
-    $('#UpdateData').submit(function(e) { 
+    // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-[ Update Admin Data ] =-=-======-==--=-=-=-=-= 
+    $('.UpdateAdminData').submit(function(e) {  
         e.preventDefault();      
         var formData = new FormData(this);
         $.ajax({
@@ -40,11 +40,14 @@ $(document).ready(function(){
             success: function (response) { 
                 $.each(response.data, function( index, value ) {
                     console.log(value.name);
-                     $("#adminname").text(value.name);
-                     $('#adminemail').text(value.email); 
+                    $("#admineditform").hide();  
+                     $(".adminname").text(value.name);
+                     $('.adminemail').text(value.email); 
                      $("#images").val(value.images);
                 });
             }
         });   
     }); 
+
+    
 });       

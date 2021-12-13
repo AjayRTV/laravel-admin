@@ -32,6 +32,8 @@ Route::post('dashboard', 'App\Http\Controllers\AdminController@userPostLogin');
 //++++++++++++++++++++++ For Login ++++++++++++++++++++++++
 Route::get('/home', 'App\Http\Controllers\AdminController@userPostLogin')->name('home');
 // Route::get('/loginadmin', 'App\Http\Controllers\AdminController@credentials')->name('loginadmin');
+Route::get('/editAdmin', 'App\Http\Controllers\AdminController@editAdmin')->name('editAdmin');
+
 Route::get('/analytics', 'App\Http\Controllers\AdminController@analytics')->name('analytics');
 Route::get('/adminShow', 'App\Http\Controllers\HomeController@adminShows')->name('adminShow');
 Route::post('product/create',['uses'=>'Auth\LoginController@adminShows']);

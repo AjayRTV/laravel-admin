@@ -10,6 +10,9 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ .content-wrapper {
+  background: white;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -10662,6 +10665,7 @@ html,
 body,
 .wrapper {
   min-height: 100%;
+  background-color: white;
 }
 
 .wrapper {
@@ -10670,6 +10674,7 @@ body,
 
 .wrapper .content-wrapper {
   min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+  background-color: white;
 }
 
 .layout-boxed .wrapper {

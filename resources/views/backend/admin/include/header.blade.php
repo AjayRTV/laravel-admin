@@ -47,14 +47,12 @@
         <!-- <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a> -->
-        @foreach ($user as $users)
-            
-        @endforeach
+      
         
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                {{-- {{ Auth::user() }} --}}
-                {{ $users->name }}
+            {{ Auth::user() }}  
+         
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

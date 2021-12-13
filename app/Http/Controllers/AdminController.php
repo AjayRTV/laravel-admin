@@ -10,6 +10,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use DataTables;
+// use DB;
 
 class AdminController extends Controller
 {
@@ -51,11 +52,13 @@ class AdminController extends Controller
     //++++++++++++++++++ Redirect Page +++++++++++++++++
     public function subAdmin( Request $request)
     {   
+        $showtables = 1; 
         $adminedit = "";
+        $editadmindata = "";
         $user = User::all('name','id');
         // print_r($user);exit;
         $admindata = DB::table('users')->get();
-        return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'adminedit' => $adminedit , 'user' => $user ]);
+        return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'showtables', $showtables ,  'editadmindata', $editadmindata , 'adminedit' => $adminedit , 'user' => $user ]);
     }  
 
     //++++++++++++++++++ Add Sub Admin +++++++++++++++++
@@ -132,10 +135,30 @@ class AdminController extends Controller
   
     }
 
+    // ----------------------[ Edit Admin ]--------------------
+
+    public function editAdmin(Request $request)
+    {   
+        try {
+  
+            $admindata = DB::table('users')->get();
+            $editadmindata = DB::table('users')->where('id', $request->adminid)->get();    
+               return response()->json(['admindata' => $admindata])->view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata]);
+            //  echo 1;   
+            //    return view('backend.admin.subadmin.addAdmin')->with('editadmindata' , $editadmindata , 'admindata' , $admindata);
+
+        } catch (\Exception $e) {
+            return Response()->json([
+                "success" => false,
+                "data   " => ''
+            ]);
+          }     
+  
+    }
 
     // --------------------- [ User login ] ---------------------
     public function userPostLogin(Request $request)
-     { 
+    { 
         $request->validate([
             "email"           =>    "required|email",
             "password"        =>    "required|min:6"
@@ -152,6 +175,10 @@ class AdminController extends Controller
             return back()->with('error', 'Whoops! invalid username or password.');
         }
     }
+
+
+
+
 
     // ------------------------------- [End Class] ----------------
 }
