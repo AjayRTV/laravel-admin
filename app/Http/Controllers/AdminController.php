@@ -10,83 +10,84 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use DataTables;
-// use DB;
 
 class AdminController extends Controller
 {
     //+++++++++++++++++ Login ++++++++++++++
     protected function credentials(Request $request)
-    {       
-       $credentials = $request->only('email', 'password');
-       if (Auth::attempt($credentials)) {
-            $user = User::all('name','id');
-            return view('backend.admin.dashboard.mainIndex')->with(['user' => $user]);
-       }
-        return Redirect::to("login")->withSuccess('Oppes! You have entered invalid credentials');
-    
+    {    
+       try { 
+            $credentials = $request->only('email', 'password');
+            if (Auth::attempt($credentials)) {
+                $user = User::all('name','id');
+                return view('backend.admin.dashboard.mainIndex')->with(['user' => $user]);
+            }
+            
+        }catch (\Exception $e) {
+            return Redirect::to("login")->withSuccess('Oppes! You have entered invalid credentials');
+        }           
     }
-   
-   
-    // public function Login()
-    // {         echo 1;exit;
-        // $adminData = DB::table('users')->get();
-        // return view('backend.admin.dashboard.mainIndex')->with('adminData' , $adminData);
-    // $user = User::all('name','id');
-    //       if(is_numeric($request->get('userName'))){
-    //         return view('backend.admin.dashboard.mainIndex')->with(['userName'=>$request->get('email'),'password'=>$request->get('password'),'user'=>$user ]);
-    //       }
-    //       elseif (filter_var($request->get('userName'), FILTER_VALIDATE_EMAIL)) {
-    //         return view('backend.admin.dashboard.mainIndex')->with(['userName' => $request->get('userName'), 'password'=>$request->get('password'),'user'=>$user]);
-    //       }
-    //       return view('backend.admin.dashboard.mainIndex')->with(['username' => $request->get('userName'), 'password'=>$request->get('password'),'user'=>$user]);
-    
-    // }
- 
+
     //++++++++++++++++  tHEME ++++++++++++++
     public function analytics(Request $request)
     {  
-       $user = User::all('name','id');
-       return view('backend.admin.dashboard.mainIndex')->with(['user' => $user]);
+        try {
+            $user = User::all('name','id');
+            return view('backend.admin.dashboard.mainIndex')->with(['user' => $user]);
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+        }         
     }
 
     //++++++++++++++++++ Redirect Page +++++++++++++++++
     public function subAdmin( Request $request)
     {   
-        $showtables = 1; 
-        $adminedit = "";
-        $editadmindata = "";
-        $user = User::all('name','id');
-        // print_r($user);exit;
-        $admindata = DB::table('users')->get();
-        return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'showtables', $showtables ,  'editadmindata', $editadmindata , 'adminedit' => $adminedit , 'user' => $user ]);
+        try {
+            $showtables = 1; 
+            $adminedit = "";
+            $editadmindata = "";
+            $user = User::all('name','id');
+            // print_r($user);exit;
+            $admindata = DB::table('users')->get();
+            return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'showtables', $showtables ,  'editadmindata', $editadmindata , 'adminedit' => $adminedit , 'user' => $user ]);
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+         }          
     }  
 
     //++++++++++++++++++ Add Sub Admin +++++++++++++++++
     public function saveUserData()
-    {  
-        $user = User::all('name','id');
-        $data = DB::table('users')->get();
-        return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-        return view('backend.admin.subadmin.addAdmin')->with(['user' => $user , 'data' => $data]);
+    {   
+        try {  
+            $user = User::all('name','id');
+            $data = DB::table('users')->get();
+            return Datatables::of($data)
+                        ->addIndexColumn()
+                        ->addColumn('action', function($row){
+                            $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                                return $btn;
+                        })
+                        ->rawColumns(['action'])
+                        ->make(true);
+            // return view('backend.admin.subadmin.addAdmin')->with(['user' => $user , 'data' => $data]);
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+         }                   
     }
     
     // ++++++++++++++ Admin |Edit +++++++++++++++
     public function adminUpdate(Request $request)
     {   
-       
-        $user = DB::table('users')->get();
-        $admindata = DB::table('users')->get();
-        $adminedit = DB::table('users')->get();
-        $data = User::select('*');
+        try {
+            $user = DB::table('users')->get();
+            $admindata = DB::table('users')->get();
+            $adminedit = DB::table('users')->get();
+            $data = User::select('*');
 
-        return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'adminedit' => $adminedit, 'user' => $user , 'data' => $data]);
+            return view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata , 'adminedit' => $adminedit, 'user' => $user , 'data' => $data]);
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+         }       
     }
 
     // ++++++++++++++++ Update Admin ++++++++++++++++++++
@@ -98,12 +99,12 @@ class AdminController extends Controller
                 $dataimg = DB::table('users')->get();
                 foreach($dataimg as $dataimgs){
                 } 
-              // ++++++++++++ RemoveFolder Image +++++++++++++
+               // ++++++++++++ RemoveFolder Image +++++++++++++
                 $image_path = public_path("admin/img/".$dataimgs->image);
                 if(file_exists($image_path)){
                     File::delete( $image_path);
                 }
-              // ++++++++++++ upldad Image +++++++++++++
+               // ++++++++++++ upldad Image +++++++++++++
                 if ($files = $request->file('image')) {
                     $time = date("d-m-Y")."-".time();
                     $imageName = $time.'.'.$request->image->extension();  
@@ -132,52 +133,75 @@ class AdminController extends Controller
                 "data   " => ''
             ]);
           }     
-  
     }
 
     // ----------------------[ Edit Admin ]--------------------
-
     public function editAdmin(Request $request)
     {   
         try {
-  
-            $admindata = DB::table('users')->get();
+             $admindata = DB::table('users')->get();
             $editadmindata = DB::table('users')->where('id', $request->adminid)->get();    
-               return response()->json(['admindata' => $admindata])->view('backend.admin.subadmin.addAdmin')->with(['admindata' => $admindata]);
-            //  echo 1;   
-            //    return view('backend.admin.subadmin.addAdmin')->with('editadmindata' , $editadmindata , 'admindata' , $admindata);
-
+               return response()->json(['admindata' => $admindata]);
         } catch (\Exception $e) {
             return Response()->json([
                 "success" => false,
                 "data   " => ''
             ]);
           }     
-  
     }
 
     // --------------------- [ User login ] ---------------------
     public function userPostLogin(Request $request)
-    { 
-        $request->validate([
-            "email"           =>    "required|email",
-            "password"        =>    "required|min:6"
-        ]);
-        $user = DB::table('users')->get();        
-        $adminData = DB::table('users')->get();        
-        $userCredentials = $request->only('email', 'password');
-        // check user using auth function
-        if (Auth::attempt($userCredentials)) {
-            return view('backend.admin.dashboard.mainIndex')->with(['user' => $user , 'adminData' => $adminData]);
-        }
+    {   
+        try {
+            $request->validate([
+                "email"           =>    "required|email",
+                "password"        =>    "required|min:6"
+            ]);
+            $user = DB::table('users')->get();        
+            $adminData = DB::table('users')->get();        
+            $userCredentials = $request->only('email', 'password');
+            // check user using auth function
+            if (Auth::attempt($userCredentials)) {
+                return view('backend.admin.dashboard.mainIndex')->with(['user' => $user , 'adminData' => $adminData]);
+            }
 
-        else {
-            return back()->with('error', 'Whoops! invalid username or password.');
-        }
+            else {
+                return back()->with('error', 'Whoops! invalid username or password.');
+            }
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+         }     
+    }
+
+    // -------------------------- [userRole] -----------------------------
+    // --------------------- [ User login ] ---------------------
+    public function userRole(Request $request)
+    {   
+        try {
+            return view('backend.admin.subadmin.demo');
+        }catch (\Exception $e) {
+            return Redirect::back()->with('faild', '');
+         }      
     }
 
 
 
+     // --------------------- [ Role user Edit ] ---------------------
+     public function roleEdit(Request $request)
+     {   
+        $admindata = DB::table('users')->get();
+    
+        return response()->json(['data' => $admindata]);
+
+        
+        // $saveuser = DB::table('userrole');
+        
+     
+        
+     }
+
+    
 
 
     // ------------------------------- [End Class] ----------------

@@ -77,4 +77,53 @@ $(document).ready(function() {
             });
         }     
     });
+
+   
+    
+    $('#Mybtn').click(function(){
+        $('#animateTable').animate({width: "550px"});
+        $('#MyForm').show();
+    });
+    $('#btnSubmit').click(function(){
+        $('#animateTable').animate({width: "1070px"});
+        $('#MyForm').hide();
+    })
+    
+ 
+
+    
+//  ------------------- [ Update Data user role] -------------------------
+    $("#addroleuser").click(function(e){ 
+        e.preventDefault();
+        // var data = $( "form" ).serialize();
+        var username = $("#username").val(); 
+        var lastusername = $("#lastusername").val();
+        
+
+        
+        
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          jQuery.ajax({
+            url:"roleEdit",
+            type: "get",
+            data: {'username': username , 'lastusername': lastusername},
+         
+         // console.log(value);
+      
+            success:function(data){   
+              
+                $('#animateTable').animate({width: "1070px"});
+                $('#MyForm').hide();
+            } 
+        });
+    });    
+    
+    
+// ---------------------------- ['  End For Document Class '] ---------------------------
 });    
+
+ 

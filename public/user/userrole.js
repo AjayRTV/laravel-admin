@@ -1,9 +1,9 @@
-$(document).ready(function(){
+ 
 $(function() {
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('saveUserData') }}",
+        ajax: "{{ route('updateAdmin') }}",
         columns: [{
                 data: 'id',
                 name: 'id'
@@ -19,4 +19,4 @@ $(function() {
         ]
     });
 });
-});
+ 

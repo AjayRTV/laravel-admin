@@ -5,13 +5,35 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
+
+    var table = $('.data-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('userrole') }}",
+        columns: [{
+                data: 'id',
+                name: 'id'
+            },
+            {
+                data: 'name',
+                name: 'name'
+            },
+            {
+                data: 'email',
+                name: 'email'
+            },
+        ]
+    });
+
+
     $("#editAdmin").click(function(stay){ 
-       jQuery.ajax({
+        jQuery.ajax({
             url:"editAdmin",
             type: "get",
             data: $(this).serialize(),
-            success:function(data){  alert(1);
+            success:function(data){   
                 $("#form1").show();
+                $('#userroleForm').show();
             } 
         });
         stay.preventDefault(); 
@@ -40,7 +62,9 @@ $(document).ready(function(){
             success: function (response) { 
                 $.each(response.data, function( index, value ) {
                     console.log(value.name);
-                    $("#admineditform").hide();  
+                    $("#admineditform").hide(); 
+                    $("#userroleForm").hide();
+                     
                      $(".adminname").text(value.name);
                      $('.adminemail').text(value.email); 
                      $("#images").val(value.images);
@@ -49,5 +73,10 @@ $(document).ready(function(){
         });   
     }); 
 
+   
+      
+ 
     
 });       
+
+ 

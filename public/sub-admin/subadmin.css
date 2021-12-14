@@ -12,6 +12,31 @@ form#form1{
     margin-top: 5%;
 }
 
+
+#userroleForm {
+    display: none;
+    /* width: 300px; */
+    border: 0;
+    padding: 14px;
+    background:f4f6f9;
+    width: 100%;
+
+}
+.content-wrapper {
+    background-color: white;
+}
+
+#MyForm{
+    display: none;
+    width: 45%;
+    border: 1px solid #fff;
+    padding: 20px;
+    padding-top: 10px;
+    background: #fff;
+    margin-left: 590px;
+    margin-top: -150px;
+}
+
 /* #formButton {
     display: block;
     margin-right: auto;

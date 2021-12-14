@@ -8,9 +8,7 @@
         <div class="container-fluid">
             <h2>Manage Admin</h2><br>  
                <!--  ------------------------ [Edit Admin] -----------------------  -->
-            
                <div class="row">
-              
                     <div class="col-sm-5">
                        <form id="editAdmin"> 
                             <table class="table"  data-toggle="modal" data-target="#myModal">
@@ -32,9 +30,9 @@
                             </table>
                         </form>
                     </div>       
-                   
+                   <!--  ------------------------ [Update Admin] -----------------------  -->
                     <div  class="col-sm editadminform" id="admineditform" > 
-                        <form method="POST" style="background: #f4f6f9; border: 0;margin-left: 8%;" class="UpdateAdminData" enctype="multipart/form-data" id="form1" >
+                        <form method="POST" style="border: 0;margin-left: 8%;" class="UpdateAdminData" enctype="multipart/form-data" id="form1" >
                          @csrf
                             <div class="row">
                                 <div class="form-group">
@@ -68,10 +66,57 @@
                             <br><br>
                          </form>  
                     </div>
-                   
-                   
-
-             
                 </div>
-            </section>    
+
+                <!-- ------------------------- [ For user Role ] ----------------------- -->
+                <div class="adminoleopen">  
+                    <span id="userroleForm">
+                    <h2>User Role</h2>
+                            <!-- Add user button -->
+                            <div class="add-btn mb-12">
+                                <button id="Mybtn" class="btn btn-primary float-right">AddUserRole</button>
+                            </div><br>
+                            <!--End Add user button -->
+                            <!-- Table -->
+                            <div class="table-responsive mt-5" id="animateTable">
+                            <table id="datatable" class="table table-bordered data-table" style="width: 100%"> 
+                                    <thead>
+                                        <tr>
+                                            <th>Firstname</th>
+                                            <th>lastName</th>
+                                            <th>Contact</th>
+                                            <th>Email</th>
+                                            <th>Password</th>
+                                            <th>Role</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--=-------------------[User Form]-------------------= -->
+                            <form id="MyForm" method="get" >
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <div class="form-row">
+                                            <!-- <label for="first-name" class="col-form-label">First-Name:</label> -->
+                                            <div class="col">
+                                                <input type="text" name="username" id="first-name" class="form-control" placeholder="First name">
+                                                <span id="fstname" style="color: red"></span>   
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" id="last-name" name="lastusername" class="form-control" placeholder="Last name">
+                                                <span id="lstname" style="color: red"></span>    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <input type="button" class="btn btn-outline-secondary addroleuser" name="submit" value="Submit" id="addroleuser"/>
+                                </div>
+                            </form>
+                            <!--=------------------------- End User Form ----------------------=-->
+                        </span>
+                         
+                    </div>
+                </div>    
+        </section>    
 @endsection

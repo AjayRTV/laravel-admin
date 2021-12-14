@@ -40,13 +40,14 @@ Route::post('product/create',['uses'=>'Auth\LoginController@adminShows']);
 
 // +++++++++++++++++ Add Admin ++++++++++++++++++
 Route::get('org', 'App\Http\Controllers\AdminController@subAdmin')->name('org');
+Route::get('userrole', 'App\Http\Controllers\AdminController@userRole')->name('userrole');
 Route::post('updateAdmin', 'App\Http\Controllers\AdminController@updateAdmin')->name('updateAdmin');
 
 
 // +++++++++++++++++ Add SubAdmin ++++++++++++++++++
 Route::get('saveUserData', 'App\Http\Controllers\AdminController@saveUserData')->name('saveUserData');
 Route::get('/org.userupdate',  'App\Http\Controllers\AdminController@adminUpdate')->name('org.userupdate');
-// Route::get('/projects/display', 'AdminController@adminUpdate');
+Route::get('/roleEdit', 'App\Http\Controllers\AdminController@roleEdit')->name('roleEdit');
 
 
 // ++++++++++++++++++++++ ADD |SUB |ADMIN ++++++++++++++++++++++++++
