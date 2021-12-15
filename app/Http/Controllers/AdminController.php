@@ -137,11 +137,12 @@ class AdminController extends Controller
 
     // ----------------------[ Edit Admin ]--------------------
     public function editAdmin(Request $request)
-    {   
+    {    
         try {
+            $data = DB::table('users')->get();
              $admindata = DB::table('users')->get();
             $editadmindata = DB::table('users')->where('id', $request->adminid)->get();    
-               return response()->json(['admindata' => $admindata]);
+               return response()->json(['admindata' => $admindata, 'data' => $data]);
         } catch (\Exception $e) {
             return Response()->json([
                 "success" => false,
@@ -178,6 +179,7 @@ class AdminController extends Controller
     // --------------------- [ User login ] ---------------------
     public function userRole(Request $request)
     {   
+        echo 1;exit;
         try {
             return view('backend.admin.subadmin.demo');
         }catch (\Exception $e) {
@@ -190,18 +192,18 @@ class AdminController extends Controller
      // --------------------- [ Role user Edit ] ---------------------
      public function roleEdit(Request $request)
      {   
-        $admindata = DB::table('users')->get();
-    
-        return response()->json(['data' => $admindata]);
+  
+       
+        $addRoleData = DB::select("INSERT INTO userrole(fname, lname,contact,email,password,role )VALUES('$request->firstname','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')");
 
-        
+        return response()->json(['addRoleData' => $addRoleData]);
         // $saveuser = DB::table('userrole');
-        
-     
-        
-     }
+    }
 
-    
+    public function getUserRole(Request $request , User $user){
+        $data = DB::table('userrole')->get();
+        return response()->json(['data' => $data]);
+    }     
 
 
     // ------------------------------- [End Class] ----------------

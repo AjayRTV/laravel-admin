@@ -48,7 +48,7 @@ Route::post('updateAdmin', 'App\Http\Controllers\AdminController@updateAdmin')->
 Route::get('saveUserData', 'App\Http\Controllers\AdminController@saveUserData')->name('saveUserData');
 Route::get('/org.userupdate',  'App\Http\Controllers\AdminController@adminUpdate')->name('org.userupdate');
 Route::get('/roleEdit', 'App\Http\Controllers\AdminController@roleEdit')->name('roleEdit');
-
+Route::get('get-userRole', 'App\Http\Controllers\AdminController@getUserRole')->name('get-userRole');
 
 // ++++++++++++++++++++++ ADD |SUB |ADMIN ++++++++++++++++++++++++++
 Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');

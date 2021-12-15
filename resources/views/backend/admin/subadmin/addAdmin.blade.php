@@ -79,15 +79,15 @@
                             <!--End Add user button -->
                             <!-- Table -->
                             <div class="table-responsive mt-5" id="animateTable">
-                            <table id="datatable" class="table table-bordered data-table" style="width: 100%"> 
+                            <table id="data-table" class="align-middle mb-0 table table-border  table-striped table-hover" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Firstname</th>
-                                            <th>lastName</th>
+                                            <th>Fname</th>
+                                            <th>Lname</th>
                                             <th>Contact</th>
                                             <th>Email</th>
                                             <th>Password</th>
-                                            <th>Role</th>
+                                            <th>Role</th>  
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,25 +95,53 @@
                                 </table>
                             </div>
                             <!--=-------------------[User Form]-------------------= -->
-                            <form id="MyForm" method="get" >
-                                <div class="row">
-                                    <div class="mb-3">
-                                        <div class="form-row">
-                                            <!-- <label for="first-name" class="col-form-label">First-Name:</label> -->
-                                            <div class="col">
-                                                <input type="text" name="username" id="first-name" class="form-control" placeholder="First name">
-                                                <span id="fstname" style="color: red"></span>   
+                            <div id="MyForm">    
+                                <div class="sticky">
+                                    <form  method="get" id="saveRoleData" >
+                                    <!-- @csrf     -->
+                                        <!-- <div class="row"> -->
+                                            <div class="mb-sm-12">
+                                                <div class="form-row">
+                                                    <form id="myuserdata">
+                                                    @csrf    
+                                                    <!-- <label for="first-name" class="col-form-label">First-Name:</label> -->
+                                                        <div class="col-md-6">
+                                                            <input type="text" name="firstname" id="first-name" class="form-control" placeholder="First name">
+                                                            <span id="fstname" style="color: red"></span>   
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="last-name" name="lastusername" class="form-control" placeholder="Last name">
+                                                            <span id="lstname" style="color: red"></span>    
+                                                        </div></br></br>
+                                                        <div class="col-md-6">
+                                                            <input type="number" id="contact" name="contact" class="form-control" placeholder="Enter Contact">
+                                                            <span id="contacts" style="color: red"></span>    
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter email">
+                                                            <span id="emails" style="color: red"></span>    
+                                                        </div><br></br>
+                                                        <div class="col-md-6">
+                                                            <input type="text" id="password" name="password" class="form-control" placeholder="Enter password">
+                                                            <span id="passwords" style="color: red"></span>    
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <select name="userrole" id="userroles" class="form-control" placeholder="Select Role">
+                                                                <option value="">Select Role</option>
+                                                                <option value="two">Two</option>
+                                                                <option value="three">Three</option>
+                                                            </select>
+                                                            <span id="userrole" style="color: red"></span>    
+                                                        </div><br></br>
+                                                        <button type="submit"  class="btn btn-outline-secondary addroleuser" name="submit" id="addroleuser"/> AddRole </submit>
+                                                    </form>
+                                                </div>
                                             </div>
-                                            <div class="col">
-                                                <input type="text" id="last-name" name="lastusername" class="form-control" placeholder="Last name">
-                                                <span id="lstname" style="color: red"></span>    
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <input type="button" class="btn btn-outline-secondary addroleuser" name="submit" value="Submit" id="addroleuser"/>
+                                        <!-- </div> -->
+                                    </form>
                                 </div>
-                            </form>
-                            <!--=------------------------- End User Form ----------------------=-->
+                            </div>    
+                                <!--=------------------------- End User Form ----------------------=-->
                         </span>
                          
                     </div>

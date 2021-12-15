@@ -37,8 +37,10 @@ form#form1{
     margin-top: -150px;
 }
 
-/* #formButton {
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-  } */
+div.sticky {
+    position: -webkit-sticky;
+    position: absolute;
+    top: 76%;
+    padding: 13px;
+    font-size: 21px;
+  }
