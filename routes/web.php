@@ -29,14 +29,17 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::post('dashboard', 'App\Http\Controllers\AdminController@userPostLogin');
+
 //++++++++++++++++++++++ For Login ++++++++++++++++++++++++
 Route::get('/home', 'App\Http\Controllers\AdminController@userPostLogin')->name('home');
 // Route::get('/loginadmin', 'App\Http\Controllers\AdminController@credentials')->name('loginadmin');
+
+// -=-========================------------['Show Dashboard] ---=-========-===--------------=
+Route::get('/analytics', 'App\Http\Controllers\AdminController@analytics')->name('analytics');
 Route::get('/editAdmin', 'App\Http\Controllers\AdminController@editAdmin')->name('editAdmin');
 
-Route::get('/analytics', 'App\Http\Controllers\AdminController@analytics')->name('analytics');
-Route::get('/adminShow', 'App\Http\Controllers\HomeController@adminShows')->name('adminShow');
-Route::post('product/create',['uses'=>'Auth\LoginController@adminShows']);
+// Route::get('/adminShow', 'App\Http\Controllers\HomeController@adminShows')->name('adminShow');
+// Route::post('product/create',['uses'=>'Auth\LoginController@adminShows']);
 
 // +++++++++++++++++ Add Admin ++++++++++++++++++
 Route::get('org', 'App\Http\Controllers\AdminController@subAdmin')->name('org');
@@ -46,12 +49,13 @@ Route::post('updateAdmin', 'App\Http\Controllers\AdminController@updateAdmin')->
 
 // +++++++++++++++++ Add SubAdmin ++++++++++++++++++
 Route::get('saveUserData', 'App\Http\Controllers\AdminController@saveUserData')->name('saveUserData');
-Route::get('/org.userupdate',  'App\Http\Controllers\AdminController@adminUpdate')->name('org.userupdate');
-Route::get('/roleEdit', 'App\Http\Controllers\AdminController@roleEdit')->name('roleEdit');
+Route::get('/roleEdit', 'App\Http\Controllers\AdminController@userRoleAdd')->name('roleEdit');
+
+// =-=-------------------[' Get Data into Datatable '] -----------------=--------------=
 Route::get('get-userRole', 'App\Http\Controllers\AdminController@getUserRole')->name('get-userRole');
 
 // ++++++++++++++++++++++ ADD |SUB |ADMIN ++++++++++++++++++++++++++
-Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');
+// Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');
 // Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');
 
 

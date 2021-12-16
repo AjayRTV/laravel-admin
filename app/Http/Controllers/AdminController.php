@@ -111,21 +111,17 @@ class AdminController extends Controller
                     $request->image->move(public_path('admin/img'), $imageName);
                 } 
                  // ++++++++++++ Update Data +++++++++++++ 
-                $admindata =  DB::update('update users set name = ?,email=?,image=? where id = ?',[$request->username,$request->email,$imageName , $request->userid]);
-                if($admindata == 1)
-                {
+                  DB::update('update users set name = ?,email=?,image=? where id = ?',[$request->username,$request->email,$imageName , $request->userid]);
+                
                     $admindata = DB::table('users')->get();
                     return response()->json(['data' => $admindata]);
-                }   
+                 
             }else{
                     // ++++++++++++ Update Data +++++++++++++ 
                     $admindata =  DB::update('update users set name = ?,email=? where id = ?',[$request->username,$request->email, $request->userid]);
-                    if($admindata == 1)
-                    {
-                        $admindata = DB::table('users')->get();
-                        return response()->json(['data' => $admindata]);
-    
-                    }  
+                    $admindata = DB::table('users')->get();
+                    return response()->json(['data' => $admindata]);
+                
                 }  
         } catch (\Exception $e) {
             return Response()->json([
@@ -140,8 +136,8 @@ class AdminController extends Controller
     {    
         try {
             $data = DB::table('users')->get();
-             $admindata = DB::table('users')->get();
-            $editadmindata = DB::table('users')->where('id', $request->adminid)->get();    
+             $admindata = DB::table('users')->where('id', $request->adminid)->get();
+            // $editadmindata = DB::table('users')->where('id', $request->adminid)->get();    
                return response()->json(['admindata' => $admindata, 'data' => $data]);
         } catch (\Exception $e) {
             return Response()->json([
@@ -175,31 +171,24 @@ class AdminController extends Controller
          }     
     }
 
-    // -------------------------- [userRole] -----------------------------
-    // --------------------- [ User login ] ---------------------
-    public function userRole(Request $request)
+    // --------------------- [ Role user Add ] ---------------------
+    public function userRoleAdd(Request $request)
     {   
-        echo 1;exit;
-        try {
-            return view('backend.admin.subadmin.demo');
-        }catch (\Exception $e) {
-            return Redirect::back()->with('faild', '');
-         }      
+        
+        $data = DB::table('userrole')->where('email',$request->email)->get();
+        if(count($data) == 0){
+            $addRoleData = DB::select("INSERT INTO userrole(fname, lname,contact,email,password,role )VALUES('$request->firstname','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')");
+            return response()->json(['addRoleData' => $addRoleData]);
+        }else{
+            $data   = array(
+                'success' => '1',
+            );
+            return response()->json(['data' => $data]);
+        }    
+        
     }
 
-
-
-     // --------------------- [ Role user Edit ] ---------------------
-     public function roleEdit(Request $request)
-     {   
-  
-       
-        $addRoleData = DB::select("INSERT INTO userrole(fname, lname,contact,email,password,role )VALUES('$request->firstname','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')");
-
-        return response()->json(['addRoleData' => $addRoleData]);
-        // $saveuser = DB::table('userrole');
-    }
-
+    // =-------------- [' Show Data into UserTable '] ---------------=
     public function getUserRole(Request $request , User $user){
         $data = DB::table('userrole')->get();
         return response()->json(['data' => $data]);

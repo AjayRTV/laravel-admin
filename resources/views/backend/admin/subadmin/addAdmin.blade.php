@@ -1,8 +1,13 @@
 @extends('layouts.master')
 @section('section')
-  <!-- Content Wrapper. Contains page content -->
-  
+@section('title')
+@foreach($admindata as $admindatas)
+@endforeach
+        <img src="{{ asset('admin/img/' . $admindatas->image) }}" alt="not Found">
+    @endsection
+<!-- Content Wrapper. Contains page content -->
 @yield('section')
+
 <!-- Main content -->
     <section class="content"><br>
         <div class="container-fluid">
@@ -23,7 +28,7 @@
                                         <tr>   
                                             <input type="hidden" name="adminid"  value="{{ $admindatas->id }}"> 
                                             <td><a href="#"  data-pk="{{ $admindatas->id }}" class="adminname" value="{{ $admindatas->name }}">{{ $admindatas->name }}</a></td>
-                                            <td> <a href="#" data-pk="{{ $admindatas->id }}" class="adminemail">{{ $admindatas->email }}</a></td>
+                                            <td><a href="#" data-pk="{{ $admindatas->id }}" class="adminemail">{{ $admindatas->email }}</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -91,6 +96,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!-- Data In userRole -->
                                     </tbody>
                                 </table>
                             </div>
@@ -98,12 +104,12 @@
                             <div id="MyForm">    
                                 <div class="sticky">
                                     <form  method="get" id="saveRoleData" >
-                                    <!-- @csrf     -->
+                                    @csrf    
                                         <!-- <div class="row"> -->
                                             <div class="mb-sm-12">
                                                 <div class="form-row">
-                                                    <form id="myuserdata">
-                                                    @csrf    
+                                                    <!-- <form id="myuserdata">
+                                                    @csrf     -->
                                                     <!-- <label for="first-name" class="col-form-label">First-Name:</label> -->
                                                         <div class="col-md-6">
                                                             <input type="text" name="firstname" id="first-name" class="form-control" placeholder="First name">
@@ -128,20 +134,20 @@
                                                         <div class="col-md-6">
                                                             <select name="userrole" id="userroles" class="form-control" placeholder="Select Role">
                                                                 <option value="">Select Role</option>
-                                                                <option value="two">Two</option>
-                                                                <option value="three">Three</option>
+                                                                <option value="SubAdmin1">SubAdmin1</option>
+                                                                <option value="SubAdmin2">SubAdmin2</option>
                                                             </select>
                                                             <span id="userrole" style="color: red"></span>    
                                                         </div><br></br>
-                                                        <button type="submit"  class="btn btn-outline-secondary addroleuser" name="submit" id="addroleuser"/> AddRole </submit>
-                                                    </form>
+                                                        <input type="submit"  class="btn btn-outline-secondary addroleuser" name="submit" id="addroleuser"/> 
+                                                    <!-- </form> -->
                                                 </div>
                                             </div>
                                         <!-- </div> -->
                                     </form>
                                 </div>
                             </div>    
-                                <!--=------------------------- End User Form ----------------------=-->
+                            <!--=------------------------- End User Form ----------------------=-->
                         </span>
                          
                     </div>

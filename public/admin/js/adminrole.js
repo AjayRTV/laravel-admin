@@ -59,7 +59,7 @@ $(document).ready(function(){
             cache:false,
             contentType: false,
             processData: false,
-            success: function (response) { 
+            success: function (response) {  console.log(response);
                 $.each(response.data, function( index, value ) {
                     console.log(value.name);
                     $("#admineditform").hide(); 
@@ -68,6 +68,12 @@ $(document).ready(function(){
                      $(".adminname").text(value.name);
                      $('.adminemail').text(value.email); 
                      $("#images").val(value.images);
+                     toastr.options =
+                    {
+                        "closeButton" : true,
+                        "progressBar" : true
+                    }
+                    toastr.success("Update  Data");
                 });
             }
         });   

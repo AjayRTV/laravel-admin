@@ -6,11 +6,12 @@
         <meta property="og:image" content="{{ asset('public/admin/img/' . $images->image) }}"/>
     @endforeach
     <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}" ss>
+    <meta name="csrf-token" content="{{ csrf_token() }}" >
     <title>{{  config('app.name', 'Laravel')  }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
+    <link rel="shortcut icon" type="image/x-icon" href="{{ URL::to('admin/img/' . $images->image) }}"/>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->

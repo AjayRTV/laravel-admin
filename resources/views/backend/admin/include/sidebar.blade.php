@@ -35,7 +35,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{route('userrole')}}" class="nav-link {{ (request()->is('userrole*')) ? 'active' : '' }}">
+                  <a href="#" class="nav-link {{ (request()->is('userrole*')) ? 'active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Role</p>
                   </a>
