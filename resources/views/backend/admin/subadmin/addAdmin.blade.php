@@ -1,10 +1,7 @@
 @extends('layouts.master')
 @section('section')
-@section('title')
-@foreach($admindata as $admindatas)
-@endforeach
-        <img src="{{ asset('admin/img/' . $admindatas->image) }}" alt="not Found">
-    @endsection
+ 
+ 
 <!-- Content Wrapper. Contains page content -->
 @yield('section')
 
@@ -14,6 +11,17 @@
             <h2>Manage Admin</h2><br>  
                <!--  ------------------------ [Edit Admin] -----------------------  -->
                <div class="row">
+
+               @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     <div class="col-sm-5">
                        <form id="editAdmin"> 
                             <table class="table"  data-toggle="modal" data-target="#myModal">
@@ -37,7 +45,8 @@
                     </div>       
                    <!--  ------------------------ [Update Admin] -----------------------  -->
                     <div  class="col-sm editadminform" id="admineditform" > 
-                        <form method="POST" style="border: 0;margin-left: 8%;" class="UpdateAdminData" enctype="multipart/form-data" id="form1" >
+                      
+                         <form method="POST" style="border: 0;margin-left: 8%;" class="UpdateAdminData" enctype="multipart/form-data" id="form1" >
                          @csrf
                             <div class="row">
                                 <div class="form-group">
@@ -47,11 +56,13 @@
                                 <div class="form-group col-sm-4">
                                     <label for="name">User Name</label>
                                     <input type="text" class="form-control" name="username" id="username"  value=" {{  $admindatas->name }} ">
+                                    <span id="adminName" style="color: red;"></span>
                                 </div>
-                                    
+                                
                                 <div class="form-group col-sm-4">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value=" {{  $admindatas->email }} ">
+                                    <input type="email" name="email" class="form-control" id="adminemail" aria-describedby="emailHelp" value=" {{  $admindatas->email }} ">
+                                    <span id="adminEmail" style="color: red;"></span>
                                 </div>
                             
                                 <div class="col-md-12 mb-2">
@@ -61,8 +72,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <input type="file" name="image" placeholder="Choose image" id="images">
-                                        <span class="text-danger">{{ $errors->first('title') }}</span>
-                                    </div>
+                                    </div><span class="text-danger" id="adminImage">{{ $errors->first('title') }}</span>
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -70,6 +80,7 @@
                             </div>  
                             <br><br>
                          </form>  
+                         
                     </div>
                 </div>
 

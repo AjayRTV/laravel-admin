@@ -32,31 +32,18 @@ Route::post('dashboard', 'App\Http\Controllers\AdminController@userPostLogin');
 
 //++++++++++++++++++++++ For Login ++++++++++++++++++++++++
 Route::get('/home', 'App\Http\Controllers\AdminController@userPostLogin')->name('home');
-// Route::get('/loginadmin', 'App\Http\Controllers\AdminController@credentials')->name('loginadmin');
-
 // -=-========================------------['Show Dashboard] ---=-========-===--------------=
 Route::get('/analytics', 'App\Http\Controllers\AdminController@analytics')->name('analytics');
 Route::get('/editAdmin', 'App\Http\Controllers\AdminController@editAdmin')->name('editAdmin');
-
-// Route::get('/adminShow', 'App\Http\Controllers\HomeController@adminShows')->name('adminShow');
-// Route::post('product/create',['uses'=>'Auth\LoginController@adminShows']);
-
 // +++++++++++++++++ Add Admin ++++++++++++++++++
 Route::get('org', 'App\Http\Controllers\AdminController@subAdmin')->name('org');
 Route::get('userrole', 'App\Http\Controllers\AdminController@userRole')->name('userrole');
 Route::post('updateAdmin', 'App\Http\Controllers\AdminController@updateAdmin')->name('updateAdmin');
-
-
 // +++++++++++++++++ Add SubAdmin ++++++++++++++++++
-Route::get('saveUserData', 'App\Http\Controllers\AdminController@saveUserData')->name('saveUserData');
 Route::get('/roleEdit', 'App\Http\Controllers\AdminController@userRoleAdd')->name('roleEdit');
-
 // =-=-------------------[' Get Data into Datatable '] -----------------=--------------=
-Route::get('get-userRole', 'App\Http\Controllers\AdminController@getUserRole')->name('get-userRole');
+ Route::get('get-userRole', 'App\Http\Controllers\AdminController@getUserRole')->name('get-userRole');
 
-// ++++++++++++++++++++++ ADD |SUB |ADMIN ++++++++++++++++++++++++++
-// Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');
-// Route::get('/addsubadmin',  'App\Http\Controllers\SubAdminController@addSubAdmin')->name('addsubadmin');
 
 
 

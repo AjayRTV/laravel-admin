@@ -14,3 +14,9 @@ div#hidetable {
     margin-left: -97%;
 }
                         
+@media screen and (max-width: 600px) {
+    .userroleForm {
+      width: 100%;
+      margin-top: 0;
+    }
+  }

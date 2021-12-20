@@ -76,7 +76,6 @@ $(function() {
      });
  
      $(".my-login-validation").submit(function() { 
-     
          var form = $(this);
          if (form[0].checkValidity() === false) {
            event.preventDefault();
@@ -85,41 +84,42 @@ $(function() {
          form.addClass('was-validated');
      });
 
-     $("#loginbtn").click(function(e){
-    
-        var email = $("#adminMail").val();
+     $("#loginbtn").click(function(e){  
+        
+        var email = $("#userName").val();
+        var password =$("#adminpassword").val();
         var regExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var passwords =$("#adminPass").val().length;
+        
         // var href = $(this).attr("http://127.0.0.1:8000/home");
         // +++++++++ For Email +++++++++++
-        if(email == ""){
+        if(email == ""){  
             $('#adminEmail').text('Please Enter mail');
            return false;
-        } else if (!email.match(regExp)){
+        }
+         else if (!email.match(regExp)){
             $('#adminEmail').text('Invalid Email');
             return false;
         }else{
             $('#adminEmail').text('');                
         }
        // +++++++++ For Password +++++++++++
-        if( passwords == "" )
+        if( password == "" )
         {
-            $('#adminPassword').text('Please Enter password');
+            $('#adminpasswords').text('Please Enter password');
             return false;
         }
-        else if(passwords < 5)
+        else if(password.length < 6)
         {
-          $('#adminPassword').text('Please Enter password Min 6 Charactor');
+          $('#adminpasswords').text('Please Enter password Min 6 Charactor');
           return false;
         }
-        else if(passwords > 13)
+        else if(passwords.length > 13)
         {
-          $('#adminPassword').text('Please Enter Max  12 Charactor');
+          $('#adminpasswords').text('Please Enter Max  12 Charactor');
           return false;  
         }
         else{
             // return true;
-            
             $.ajaxSetup({
                 headers: {
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

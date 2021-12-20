@@ -26,13 +26,13 @@ $(document).ready(function(){
     });
 
 
-    $("#editAdmin").click(function(stay){ 
+    $("#editAdmin").click(function(stay){     
         jQuery.ajax({
             url:"editAdmin",
             type: "get",
             data: $(this).serialize(),
-            success:function(data){   
-                $("#form1").show();
+            success:function(data){    
+                $(".UpdateAdminData").show();
                 $('#userroleForm').show();
             } 
         });
@@ -49,40 +49,88 @@ $(document).ready(function(){
     });
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-[ Update Admin Data ] =-=-======-==--=-=-=-=-= 
-    $('.UpdateAdminData').submit(function(e) {  
+    $('.UpdateAdminData').submit(function(e) {   
         e.preventDefault();      
         var formData = new FormData(this);
-        $.ajax({
-            type:'post',
-            url: "updateAdmin",
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: function (response) {  console.log(response);
-                $.each(response.data, function( index, value ) {
-                    console.log(value.name);
-                    $("#admineditform").hide(); 
-                    $("#userroleForm").hide();
-                     
-                     $(".adminname").text(value.name);
-                     $('.adminemail').text(value.email); 
-                     $("#images").val(value.images);
-                     toastr.options =
-                    {
-                        "closeButton" : true,
-                        "progressBar" : true
-                    }
-                    toastr.success("Update  Data");
-                });
+        var adminname = $('#username').val();  
+        var adminEmail = $('#adminemail').val();
+        var regExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       
+        if( adminname == "" || adminEmail =="" || !adminEmail.match(regExp)  )
+        { 
+            var adminname = $('#username').val().length;
+            if (adminname == 0) {  
+                $('#adminName').text('Enter Name ');
+            }   
+            var emails = $("#adminemail").val().length;
+            if (emails < 0) { 
+                $('#adminEmail').text('Enter Email ');
+            }  
+            var email = $("#adminemail").val();
+            var regExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!email.match(regExp)) {
+                $('#adminEmail').text('Invalid Email');
             }
-        });   
+            else if (email != "" && email.match(regExp)) {
+                $('#adminEmail').text(''); 
+            }
+            $('input').keyup(function () {
+                var adminname = $("#username").val().length;
+                if (adminname < 3) {
+                    $("#adminName").text("Enter Minumum 3 charactor ");
+                    // return false;
+                }else if (adminname > 2) {
+                    $("#adminName").text(" ");
+                }
+                var email = $("#adminemail").val();
+                var regExp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if (!email.match(regExp)) {
+                    $('#adminEmail').text('Invalid Email');
+                }
+                else if (email != "" && email.match(regExp)) {
+                    $('#adminEmail').text(''); 
+                }
+            });    
+        }
+        else{
+            $.ajax({
+                type:'post',
+                url: "updateAdmin",
+                data: formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success: function (response) {     
+                console.log(response.value);    
+                   if( $.each(response.data, function( index, value ) {
+                        $("#admineditform").hide(); 
+                        $("#userroleForm").hide();
+                        
+                        $(".adminname").text(value.name);
+                        $('.adminemail').text(value.email); 
+                        $("#images").val(value.images);
+                        toastr.options =
+                        {
+                            "closeButton" : true,
+                            "progressBar" : true
+                        }
+                        toastr.success("Update  Data");
+                    })); 
+                  else{
+                        toastr.options =
+                        {
+                            "closeButton" : true,
+                            "progressBar" : true
+                        }
+                        toastr.error(" Fill Image Type ");
+                  }   
+                      
+                },
+              });   
+          }    
     }); 
 
-   
-      
- 
-    
+    //  ==-----------------= [End Doccument] =------------------=
 });       
 
  

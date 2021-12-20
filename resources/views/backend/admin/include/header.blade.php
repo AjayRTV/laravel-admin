@@ -43,15 +43,20 @@
           </form>
         </div> 
       </li>-->
+      <?php
+
+use Illuminate\Auth\Events\Login;
+
+$user = Auth::user(); if($user != ""){ ?>
       <li class="nav-item">
         <!-- <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a> -->
       
-        
+        {{Auth::user()->name}}  
         <li class="nav-item dropdown">
             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-              {{ Auth::user()->name }}  
+              
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -66,8 +71,10 @@
                 </form>
             </div>
         </li>
-      
       </li>
+      <?php }else{  ?>
+      <script>window.location = "http://127.0.0.1:8000/";</script>
+      <?php }?>   
     </ul>
   </nav>
   @yield('header')

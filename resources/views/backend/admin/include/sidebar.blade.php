@@ -10,7 +10,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
          <li class="nav-item">
-            <a href="{{ route('analytics') }}" class="nav-link {{ request()->is('analytics') ? 'active' : '' }}">
+            <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Analytics
