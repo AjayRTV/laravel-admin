@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Contracts\DataTable;
 use DataTables;
 use Exception;
+use App\role;
 
 class UserRoleController extends Controller {
 
     // = -------------- [ ' Show Data into UserTable ' ] -------------- -=
 
     public function getUserRole( Request $request, User $user ) {
+
         $data = DB::table( 'userrole' )->get();
+
         return response()->json( [ 'data' => $data ] );
     }
 
@@ -33,9 +36,40 @@ class UserRoleController extends Controller {
                 $addRoleData = DB::select( "INSERT INTO userrole(fname, lname,contact,email,password,role )VALUES('$request->firstname','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')" );
                 return response()->json( [ 'addRoleData' => $addRoleData ], 200 );
             }
-
         } catch( Exception $e ) {
             return response()->json( 'faild', 200 );
+        }
+    }
+
+    // *--------------- Show UserRole Page  ---------------
+
+    public function index( Request $request ) {
+
+        $user = User::all( 'name', 'id' );
+
+        // $data = DB::table( 'role' )->get();
+
+        return view( 'backend.admin.subadmin.addRole' )->with( [ 'user' => $user ] );
+    }
+    //*------------- Get Data In RoleTable ---------------
+
+    public function getUserRoles( Request $request, User $user ) {
+
+        $data = DB::table( 'role' )->get();
+
+        return response()->json( [ 'data' => $data ] );
+    }
+
+    //*------------- Insert Data from Roleform  ---------------
+
+    public function insertUserRole( Request $request ) {
+        try {
+            $result = DB::table( 'role' )->insert( [
+                'name' => $request->name,
+            ] );
+            return response()->json( [ 'role' => $result ], 200 );
+        } catch( Exception $e ) {
+            return response()->json( 'false', 200 );
         }
     }
 

@@ -34,7 +34,8 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('admin/js/adminrole.js') }}" defer></script>
 <script src="{{asset('sub-admin/subadmin.js')}}" defer></script>
-<script src="{{asset('user/userrole.js')}}" defer></script>
+<script src="{{asset('sub-admin/userrole.js')}}" defer></script>
+<script src="{{asset('sub-admin/role.js')}}" defer></script>
 
 
 

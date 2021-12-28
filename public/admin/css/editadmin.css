@@ -1,11 +1,16 @@
-div#admineditform {
+/* div#admineditform {
     margin-top: -5%;
     
+} */
+
+div#admineditform {
+    margin-left: 52%;
+    margin-top: -23%;
 }
 form#form1 {
-    
     border: 0;
-    
+    background: #f2f2f2;
+
 }
 
 div#hidetable {
@@ -13,10 +18,33 @@ div#hidetable {
     padding-right: -1%;
     margin-left: -97%;
 }
-                        
+     
+span#AdminBack {
+    margin-left: 9%;
+    width: 23%;
+    height: 98%;
+}
+
+div#editAdmin {
+ 
+    width: 101%;
+}
+
 @media screen and (max-width: 600px) {
     .userroleForm {
       width: 100%;
       margin-top: 0;
     }
+
+    div#admineditform {
+        margin-top: -109%;
+    }
   }
+
+  /* input#adminemail {
+    margin-left: 38%;
+    width: 135%;
+}
+input#username {
+    width: 135%;
+} */

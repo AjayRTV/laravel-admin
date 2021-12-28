@@ -15,42 +15,47 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller {
-    //+++++++++++++++++ Login ++++++++++++++
+    //-------------------- ['Login'] ------------------
     protected function credentials( Request $request ) {
-
         try {
-
             $credentials = $request->only( 'email', 'password' );
             if ( Auth::attempt( $credentials ) ) {
                 $user = User::all( 'name', 'id' );
                 return view( 'backend.admin.dashboard.mainIndex' )->with( [ 'user' => $user ] );
             }
-
         } catch ( \Exception $e ) {
             return Redirect::to( 'login' )->withSuccess( 'Oppes! You have entered invalid credentials' );
         }
 
     }
 
-    //++++++++++++++++  tHEME ++++++++++++++
-
+    //-------------------- ['tHEME'] -------------------
     public function analytics( Request $request ) {
-
         try {
             $user = User::all( 'name', 'id' );
             $admindata = DB::table( 'userrole' )->get();
 
             return view( 'backend.admin.dashboard.mainIndex' )->with( [ 'user' => $user, 'admindata' => $admindata ] );
-        } catch ( \Exception $e ) {
+        }catch ( \Exception $e ) {
+            return Redirect::back()->with( 'faild', '' );
+        }
+
+    }
+ 
+    //--------------------  ['Admin Data'] ---------------
+    public function adminData( Request $request ) 
+    {
+        try { 
+            $data = DB::table( 'users' )->get();
+            return response()->json( [ 'data' => $data] );
+        }catch ( \Exception $e ) {
             return Redirect::back()->with( 'faild', '' );
         }
 
     }
 
-    //++++++++++++++++++ Redirect Page +++++++++++++++++
-
+    //-------------------- ['Redirect Page'] --------------
     public function subAdmin( Request $request ) {
-
         try {
 
             $showtables = 1;
@@ -65,10 +70,8 @@ class AdminController extends Controller {
 
     }
 
-    //++++++++++++++++++ Add Sub Admin +++++++++++++++++
-
+    //-------------------- ['Add Sub Admin'] ---------------
     public function saveUserData() {
-
         try {
             $user = User::all( 'name', 'id' );
             $data = DB::table( 'users' )->get();
@@ -82,45 +85,22 @@ class AdminController extends Controller {
         ->rawColumns( [ 'action' ] )
         ->make( true );
         // return view( 'backend.admin.subadmin.addAdmin' )->with( [ 'user' => $user, 'data' => $data ] );
-    } catch ( \Exception $e ) {
-        return Redirect::back()->with( 'faild', '' );
+        } catch ( \Exception $e ) {
+            return Redirect::back()->with( 'faild', '' );
+        }
     }
-
-}
-
-// ++++++++++++++ Admin |Edit +++++++++++++++
-
-// public function adminUpdate( Request $request ) {
-
-//     try {
-//         $user = DB::table( 'users' )->get();
-//         $admindata = DB::table( 'users' )->get();
-//         $adminedit = DB::table( 'users' )->get();
-//         $data = User::select( '*' );
-
-//         return view( 'backend.admin.subadmin.addAdmin' )->with( [ 'admindata' => $admindata, 'adminedit' => $adminedit, 'user' => $user, 'data' => $data ] );
-//     } catch ( \Exception $e ) {
-//         return Redirect::back()->with( 'faild', '' );
-//     }
-
-// }
-
-// ++++++++++++++++ Update Admin ++++++++++++++++++++
-
-public function updateAdmin( Request $request ) {
-
-    try {
-
-        $file = $request->image;
-        // $imagevalue = count( $request->image );
-        $imagevalue = count( ( array )$file );
-       
+ 
+    // -------------------- ['Update Admin'] ---------------
+    public function updateAdmin( Request $request ) {
+      try
+        {
+            $file = $request->image;
+            // $imagevalue = count( $request->image );
+            $imagevalue = count( ( array )$file );
             $fileArray = array( 'image' => $file );
-
             $rules = array(
                 'image' => 'mimes:jpeg,jpg,png,gif|required|max:10000' // max 10000kb
             );
-
             $validator = Validator::make( $fileArray, $rules );
             // if ( $imagevalue > 0 ) {
             if ( $validator->fails() && $imagevalue > 0 ) {
@@ -132,7 +112,6 @@ public function updateAdmin( Request $request ) {
 
                 return Redirect::to( '/' )->back( 'faild', 'Image is Not Type extension' );
             } else {
-               
                 // ++++++++++++ Unlik Image +++++++++++++
                 if ( $request->image != '' ) {
                     $dataimg = DB::table( 'users' )->get();
@@ -151,43 +130,34 @@ public function updateAdmin( Request $request ) {
 
                         $request->image->move( public_path( 'admin/img' ), $imageName );
                     }
-
                     // ++++++++++++ Update Data +++++++++++++
                     DB::update( 'update users set name = ?, email = ?, image = ? where id = ?', [ $request->username, $request->email, $imageName, $request->userid ] );
-
                     $admindata = DB::table( 'users' )->get();
-                   
-                    return response()->json( [ 'data' => $admindata ] );
-
+                        return response()->json( [ 'data' => $admindata ] );
                 } else {  
                     // ++++++++++++ Update Data +++++++++++++
                     $admindata =  DB::update( 'update users set name = ?, email = ? where id = ?', [ $request->username, $request->email, $request->userid ] );
                     $admindata = DB::table( 'users' )->get();
                     return response()->json( [ 'data' => $admindata ] );
-
                 }
             }
-            // }
-
         } catch ( \Exception $e ) {
-            return Response()->json( [
-                'success' => false,
-                'data   ' => ''
-            ] );
-        }
-
+                return Response()->json( [
+                    'success' => false,
+                    'data   ' => ''
+                ] );
+            }
     }
-
+    
     // ----------------------[ Edit Admin ]--------------------
-
     public function editAdmin( Request $request ) {
-   
-        try {
-            $data = DB::table( 'users' )->get();
+        // print_r($request->all());exit;
+       try {
+            $data = DB::table( 'users' )->where('id', $request->id)->get();
             $admindata = DB::table( 'users' )->where( 'id', $request->adminid )->get();
             // $editadmindata = DB::table( 'users' )->where( 'id', $request->adminid )->get();
             return response()->json( [ 'admindata' => $admindata, 'data' => $data ] );
-        } catch ( \Exception $e ) {
+        }catch ( \Exception $e ) {
             return Response()->json( [
                 'success' => false,
                 'data   ' => ''
@@ -197,9 +167,7 @@ public function updateAdmin( Request $request ) {
     }
 
     // --------------------- [ User login ] ---------------------
-
     public function userPostLogin( Request $request ) {
-
         try {
             $request->validate( [
                 'email'           =>    'required|email',
@@ -219,15 +187,19 @@ public function updateAdmin( Request $request ) {
         } catch ( \Exception $e ) {
             return Redirect::back()->with( 'faild', '' );
         }
-
     }
-
  
     // = -------------- [ ' Show Data into UserTable ' ] -------------- -=
     public function getUserRole( Request $request, User $user ) {
-        $data = DB::table( 'userrole' )->get();
-        return response()->json( [ 'data' => $data ] );
+        try {
+            $admin_data = DB::table( 'users' )->get();
+            $data = DB::table( 'userrole' )->get();
+            return response()->json( [ 'admin_data' => $admin_data , 'data' => $data ] );
+        } 
+        catch ( \Exception $e ) {
+            return Redirect::back()->with( 'faild');
+        }   
     }
-
+ 
     // ------------------------------- [ End Class ] ----------------
 }

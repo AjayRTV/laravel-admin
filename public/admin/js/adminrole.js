@@ -5,15 +5,9 @@ $(document).ready(function() {
 });
 
 $(document).ready(function(){
-
-    var table = $('.data-table').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('userrole') }}",
-        columns: [{
-                data: 'id',
-                name: 'id'
-            },
+   var table = $('#admin-table').DataTable({
+        ajax: "admindata",
+        columns: [ 
             {
                 data: 'name',
                 name: 'name'
@@ -25,28 +19,74 @@ $(document).ready(function(){
         ]
     });
 
+    $('#showtable').click(function () {   ;
+        $('#editAdmin').animate({ width: "50%" });
+        $('#admineditform').show();
+    });
+    
+    $('#AdminBack').click(function () { 
+        $('#editAdmin').animate({ width: "100%" });
+        $("#admineditform").hide(); 
+        $('#userroleForm').hide();
+        $('#imgInp').val("");
+        
+        
+    });
 
-    $("#editAdmin").click(function(stay){     
+
+    // var table = $('.data-table').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "{{ route('userrole') }}",
+    //     columns: [{
+    //             data: 'id',
+    //             name: 'id'
+    //         },
+    //         {
+    //             data: 'name',
+    //             name: 'name'
+    //         },
+    //         {
+    //             data: 'email',
+    //             name: 'email'
+    //         },
+    //     ]
+    // });
+
+
+    // $("#editAdmin").click(function(stay){  
+        $("#admin-table").on('click', 'td', function (stay){
+        var data =  table.row( this ).data();
+        // console.log(data);    
         jQuery.ajax({
             url:"editAdmin",
             type: "get",
-            data: $(this).serialize(),
+            data: data,
             success:function(data){    
+                //$('#editAdmin').animate({ width: "50%" });
                 $(".UpdateAdminData").show();
                 $('#userroleForm').show();
+              
             } 
         });
         stay.preventDefault(); 
     });
    
     // =-=-=-=-=-=-=-=-=-=-=-=-=-= [ For Image ] =-=-=-=-=-=-=-=-=--=-=-=-=
-    $('#image').change(function(){
-        let reader = new FileReader();
-        reader.onload = (e) => { 
-            $('#image_preview_container').attr('src', e.target.result); 
+    // $('#image').change(function(){
+    //     let reader = new FileReader();
+    //     reader.onload = (e) => { 
+    //         $('#image_preview_container').attr('src', e.target.result); 
+    //     }
+    //     reader.readAsDataURL(this.files[0]); 
+    // });
+
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+          blah.src = URL.createObjectURL(file)
         }
-        reader.readAsDataURL(this.files[0]); 
-    });
+      }
 
     // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-[ Update Admin Data ] =-=-======-==--=-=-=-=-= 
     $('.UpdateAdminData').submit(function(e) {   
@@ -105,7 +145,8 @@ $(document).ready(function(){
                    if( $.each(response.data, function( index, value ) {
                         $("#admineditform").hide(); 
                         $("#userroleForm").hide();
-                        
+                        $("#data-table").show();
+                        $('#editAdmin').animate({ width: "100%" });
                         $(".adminname").text(value.name);
                         $('.adminemail').text(value.email); 
                         $("#images").val(value.images);

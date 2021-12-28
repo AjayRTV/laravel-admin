@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="{{asset('user/userrole.js')}}">
   <!-- ------------ [ subadmin ] ---------- -->
   <link rel="stylesheet" href="{{asset('sub-admin/subadmin.css')}}">
+  <link rel="stylesheet" href="{{asset('sub-admin/role.css')}}">
    <!-- ------------ [ Toast ] ---------- -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
    <!-- =-------------[ For DataTable ]------------------= -->

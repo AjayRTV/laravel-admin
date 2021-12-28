@@ -20,6 +20,14 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
+
+    # Redirect if index.php is in the URL
+    RewriteRule ^index.php/(.+) /$1 [R=301,L]
+
+    RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ /public/$1 [L,QSA]
 </IfModule>
  
  
