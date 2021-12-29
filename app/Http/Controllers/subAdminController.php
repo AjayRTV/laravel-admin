@@ -24,7 +24,7 @@ class subAdminController extends Controller {
         try {
             $duplicatemail = DB::table( 'userrole' )->where( 'email', $request->email )->get();
             if ( count( $duplicatemail ) == 0 ) {
-               $addRoleData = DB::select( "INSERT INTO userrole(firstName, lastName,contact,email,password,role )VALUES('$request->firstname  $request->lastusername','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')" );
+               $addRoleData = DB::select( "INSERT INTO userrole(firstName, lastName,contact,email,password,role )VALUES('$request->firstname','$request->lastusername','$request->contact','$request->email','$request->password','$request->userrole')" );
                return response()->json( [ 'addRoleData' => $addRoleData ], 200 );
             }
         }catch( Exception $e ) {
@@ -53,21 +53,15 @@ class subAdminController extends Controller {
     // ----------------- ['update User] ------------------
     public function updateUser( Request $request ) {
         try {   
-            $fname= $request->firstname;
-            $lname = $request->lastusername;
-            
-            $mergename = $fname . " " .$lname;
-           
              $updateRoleData = DB::select( " UPDATE userrole
-                 SET firstName = '$mergename',
+                 SET firstName = '$request->firstname',
                      lastName = '$request->lastusername',
                      contact = '$request->contact',
                      email = '$request->email',
                      password = '$request->password',
                      role = '$request->userrole' WHERE id = '$request->userID' ");
-             
                      return response()->json( [ 'updateRoleData' => $updateRoleData ] );
-
+              
          } catch ( \Exception $e ) {
             return Response()->json( [
                 'success' => false,

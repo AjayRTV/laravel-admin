@@ -26,8 +26,8 @@ span#passwords {
 }
 form#form1{
     padding: 20px;
-    border: 1px solid #666;
-    background: #f2f2f2;
+    /* border: 1px solid #666; */
+    /* background: #f2f2f2; */
     display: none;
     margin-top: 10%;
     border-radius: 5%;
@@ -51,14 +51,13 @@ form#form1{
 div.stickyform {
     position: -webkit-sticky;
     position: absolute;
-    top: 60%;
-    background-color: whitesmoke;
-    border: white;
-    border-radius: 2%;
-    padding: 20px;
-    font-size: 20px;
+    top: 88%;
     margin-right: 50;
   }
+  .form-row.design {
+    width: 190%;
+}
+
 
 #MyForm{
     display: none;
@@ -99,28 +98,19 @@ input#addroleuser {
     margin-left: 1%;
 }
 
-span#User_Back {
-    width: 85%;
-    height: 38%;
-    margin-left: 2%;
-    margin-top: 21%;
-    background: black;
-    color: white;
-}
-
+ 
 b#mrgback {
     margin-left: 20%;
 }
-/*.sticky {*/
-    /*position: -webkit-sticky;*/
-/*    position: absolute;*/
-/*    top: 150%;*/
-/*    background-color: white;*/
-/*    padding: 10px;*/
-/*    font-size: 20px;*/
-/*        margin-top: -473%;*/
+span#User_Back {
+    width: 22%;
+    /* color: white; */
+    background: #2f7a2d;
+    height: 20%;
+    margin-left: 6%;
+}
 
-/*  }*/
+ 
 
   /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
@@ -128,13 +118,25 @@ b#mrgback {
             margin-top: -166%!important;    
     }
 
-    span#User_Back {
-        width: 77%;
-        height: 31%;
-        margin-left: 5%;
-        margin-top: 7%;
+    /* input[type="search"] {
+    width: 53%;
+} */
+     
+    @media only screen and (max-width: 600px){
+        div.stickyform {
+            position: -webkit-sticky;
+            position: absolute;
+            margin-left: -89%;
+            top: 100%;
+            border: white;
+            border-radius: 2%;
+            padding: 20px;
+        }
+        span#User_Back {
+            width: 42%;
+            /* color: white; */
+            background: #2f7a2d;
+            height: 13%;
+        }
     }
-    
-
-  
 }

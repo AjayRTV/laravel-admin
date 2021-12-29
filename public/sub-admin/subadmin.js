@@ -3,6 +3,8 @@ $(document).ready(function () {
     $("#formButton").click(function () {
         $("#hideform").toggle();
     });
+     
+
     // ----------------------  [ Data Table ] --------------------
     var table = $('#data-table').DataTable({
         processing: false,
@@ -13,8 +15,10 @@ $(document).ready(function () {
             "visible": false,
             // "searchable": false
             },
-        {
-            data: 'firstName',
+            {
+                render: function ( data, type, row ) {
+                return row.firstName + ' ' + row.lastName + ' ';
+            }
         },
         
         {
