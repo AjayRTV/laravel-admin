@@ -3,17 +3,138 @@ button#formButton {
     margin-left: 3%;
 
 }
-
+  /* for validatkion */
+  span#fstname {
+    color: red;
+    font-size: 16px;
+}
+span#lstname {
+    color: red;
+    font-size: 16px;
+}
+span#contacts {
+    color: red;
+    font-size: 16px;
+}
+span#emails {
+    color: red;
+    font-size: 16px;
+}
+span#passwords {
+    color: red;
+    font-size: 16px;
+}
 form#form1{
-    padding: 15px;
+    padding: 20px;
     border: 1px solid #666;
-    background: #fff;
+    background: #f2f2f2;
     display: none;
-    margin-top: 5%;
+    margin-top: 10%;
+    border-radius: 5%;
+}
+  
+
+/* User Role Form */
+#userroleForm {
+    display: none;
+    /* width: 300px; */
+    border: 0;
+    padding: 14px;
+    background:f4f6f9;
+    width: 100%;
+}
+.content-wrapper {
+    background-color: white;
 }
 
-/* #formButton {
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-  } */
+/* Form Stiky */
+div.stickyform {
+    position: -webkit-sticky;
+    position: absolute;
+    top: 60%;
+    background-color: whitesmoke;
+    border: white;
+    border-radius: 2%;
+    padding: 20px;
+    font-size: 20px;
+    margin-right: 50;
+  }
+
+#MyForm{
+    display: none;
+    width: 45%;
+    border: 1px solid #fff;
+    padding: 20px;
+    background: #fff;
+    margin-left: 590px;
+    top: 80;
+    right: 0;
+}
+
+
+.setpostion{
+    position:relative;
+    margin-top: -4%!important;
+    margin-left: 57%!important;
+    
+}
+
+div#setInput {
+    width: 198%;
+}
+ 
+ .setmarg {
+    padding-top: 2%;
+    margin-left: 2%;
+    width: 94%;
+}
+
+div#text-pading {
+    margin-top: 3%;
+ 
+}
+
+input#addroleuser {
+    width: 85%;
+    margin-left: 1%;
+}
+
+span#User_Back {
+    width: 85%;
+    height: 38%;
+    margin-left: 2%;
+    margin-top: 21%;
+    background: black;
+    color: white;
+}
+
+b#mrgback {
+    margin-left: 20%;
+}
+/*.sticky {*/
+    /*position: -webkit-sticky;*/
+/*    position: absolute;*/
+/*    top: 150%;*/
+/*    background-color: white;*/
+/*    padding: 10px;*/
+/*    font-size: 20px;*/
+/*        margin-top: -473%;*/
+
+/*  }*/
+
+  /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+    .setpostion{
+            margin-top: -166%!important;    
+    }
+
+    span#User_Back {
+        width: 77%;
+        height: 31%;
+        margin-left: 5%;
+        margin-top: 7%;
+    }
+    
+
+  
+}

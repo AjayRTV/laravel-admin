@@ -34,6 +34,13 @@
 <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
 <script src="{{ asset('admin/js/adminrole.js') }}" defer></script>
 <script src="{{asset('sub-admin/subadmin.js')}}" defer></script>
+<script src="{{asset('sub-admin/userrole.js')}}" defer></script>
+<script src="{{asset('sub-admin/role.js')}}" defer></script>
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 @stack('script')
