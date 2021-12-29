@@ -33,8 +33,7 @@
                             </tbody>
                         </table>
                     </div> 
-                    <!-- </form> -->
-                    <!--  ------------------------ [Update Admin] -----------------------  -->
+                     <!--  ------------------------ [Update Admin] -----------------------  -->
                     <div  class="col-sm-5 editadminform" id="admineditform" > 
                         <form method="POST" style="border: 0;margin-left: 8%;" class="UpdateAdminData" enctype="multipart/form-data" id="form1" >
                             @csrf
@@ -69,93 +68,86 @@
                                 </div>
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    <span class="btn btn-Success" id="AdminBack"><i> Back </i></span>
+                                    <span class="btn" id="AdminBack"><b> Back </b></span>
                                 </div>
                             </div>   
                         </form>  
                     </div>
                 </div>
-                <!-- ------------------------- [ For user Role ] ----------------------- -->
-                <div class="container adminoleopen" >
-                    <div class="row">
-                        <div class="col-md-12 col-md-6 col-over">
-                            <span id="userroleForm">
-                            <h2>User Role</h2>
-                                <button id="Mybtn" class="btn btn-primary float-right">AddUserRole</button><br><br>
-                            <!-- Table -->
-                            <div class="table-responsive mt-5" id="animateTable">
-                                <table id="data-table" class="align-middle mb-0 table table-border  table-striped table-hover " width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Full Name</th>
-                                            <th>Contact</th>
-                                            <th>Email</th>
-                                            <th>Role</th>  
-                                        </tr>
-                                    </thead >
-                                    <tbody>
-                                        <!--Data In userRole -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                            <!--=-------------------[User Form]-------------------= -->
-                        <div id="MyForm" class = "setpostion" >  
-                            <div class="col-6" id= "roleformhide">
-                                <div class="stickyform" id="setInput">
-                                    <h4>Add Role</h4><br>
-                                    <form  method="get" id="saveRoleData" >
-                                        @csrf    
-                                        <div class="row"> 
-                                            <!--<div class="mb-sm-12">-->
-                                            <div class="form-row">
-                                                <form id="myuserdata">
-                                                @csrf  
-                                                    <input type="hidden" id="userID">  
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <input type="text" name="firstname" id="first-name" class="form-control" placeholder="First name">
-                                                        <span id="fstname" style="color: red"></span>   
-                                                    </div>
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <input type="text" id="last-name" name="lastusername" class="form-control text-pading" placeholder="Last name">
-                                                        <span id="lstname" style="color: red"></span>    
-                                                    </div>
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <input type="number" id="contact" name="contact" class="form-control text-pading" placeholder="Enter Contact">
-                                                        <span id="contacts" style="color: red"></span>    
-                                                    </div>
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <input type="email" id="email" name="email" class="form-control text-pading" placeholder="Enter email">
-                                                        <span id="emails" style="color: red"></span>    
-                                                    </div>
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <input type="text" id="password" name="password" class="form-control text-pading" placeholder="Enter password">
-                                                        <span id="passwords" style="color: red"></span>    
-                                                    </div>
-                                                    <div class="col-md-12" id="text-pading">
-                                                        <select name="userrole" id="userRole" class="form-control text-pading" placeholder="Select Role">
-                                                            <option value="selectrole"  >Select Role</option>
-                                                            <option value="SubAdmin1">SubAdmin1</option>
-                                                            <option value="SubAdmin2" >SubAdmin2</option>
-                                                        </select>
-                                                        <span id="userrole" style="color: red"></span>    
-                                                    </div>
-                                                    <div class="setmarg" id="text-pading">
-                                                        <input type="submit"  class="form-control btn btn-primary addroleuser" name="submit" id="addroleuser"/> 
-                                                    </div>
-                                                    <span class="btn btn-Success block" id="User_Back" ><i class="block"> Back </i></span>
-                                                </form> 
-                                            </div>
-                                        </div> 
-                                    </form>
-                                </div>
-                            </div>
-                        </div>    
-                            <!--=------------------------- End User Form ----------------------=-->
+                 <!-- ------------------------- [ For user Role ] ----------------------- -->
+                <div id="userroleForm">
+                     <!-- AddUser button -->
+                    <div class="addfrom-btn mb-5">
+                        <button id="Mybtn" class="btn btn-outline-secondary float-right add-bttn">Add-Role</button>
                     </div>
-                </div>
-            </div>    
+                    <div class="table-responsive  mt-5 " id="animateTable">
+                        <table id="data-table" class="align-middle mb-0 table table-border  table-striped table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Full Name</th>
+                                    <th>Contact</th>
+                                    <th>Email</th>
+                                    <th>Role</th>  
+                                </tr>
+                            </thead>                
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div> 
+                    <!-- User Form  -->
+                    <div id="MyForm">
+                        <div class="stickyform">
+                            <form  method="get" id="saveRoleData" >
+                                @csrf    
+                                <div class="row"> 
+                                    <div class="form-row design">
+                                        <form id="myuserdata">
+                                        @csrf  
+                                            <input type="hidden" id="userID">  
+                                            <div class="col-md-6" id="text-pading">
+                                                <input type="text" name="firstname" id="first-name" class="form-control" placeholder="First Name">
+                                                <span id="fstname"></span>   
+                                            </div>
+                                            <div class="col-md-6" id="text-pading">
+                                                <input type="text" id="last-name" name="lastusername" class="form-control text-pading" placeholder="Last Name">
+                                                <span id="lstname" ></span>    
+                                            </div>
+                                            <div class="col-md-6" id="text-pading">
+                                                <input type="number" id="contact" name="contact" class="form-control text-pading" placeholder="Enter Contact">
+                                                <span id="contacts"></span>    
+                                            </div>
+                                            <div class="col-md-6" id="text-pading">
+                                                <input type="email" id="email" name="email" class="form-control text-pading" placeholder="Enter email">
+                                                <span id="emails" ></span>    
+                                            </div>
+                                            <div class="col-md-6" id="text-pading">
+                                                <input type="text" id="password" name="password" class="form-control text-pading" placeholder="Enter password">
+                                                <span id="passwords"></span>    
+                                            </div>
+                                            <div class="col-md-6" id="text-pading">
+                                                <select name="userrole" id="userRole" class="form-control text-pading" placeholder="Select Role">
+                                                    <option value="selectrole"  >Select Role</option>
+                                                    <option value="SubAdmin1">SubAdmin1</option>
+                                                    <option value="SubAdmin2" >SubAdmin2</option>
+                                                </select>
+                                                <span id="userrole" style="color: red"></span>    
+                                            </div>
+                                            <div class="setmarg col-md-3" id="text-pading">
+                                                <input type="submit"  class="form-control btn btn-primary addroleuser" name="submit" id="addroleuser"/> 
+                                            </div> 
+                                            <div class="col-md-3" >
+                                            <span class="btn" id="User_Back"><b id="mrgback"> Back </b></span>      
+                                            <!-- <span class="form-control" id="User_Back" ><b id="mrgback"> Back </b></span> -->
+                                            </div><br>
+                                        </form> <br>
+                                    </div>
+                                </div> 
+                            </form>
+                        </div>
+                    </div>
+                <!-- End User Form  -->
+            </div>
         </div>  
     </section>    
 @endsection

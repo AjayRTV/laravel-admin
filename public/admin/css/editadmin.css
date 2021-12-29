@@ -23,11 +23,18 @@ span#AdminBack {
     margin-left: 9%;
     width: 23%;
     height: 98%;
+    background: black;
+    color: white;
+    
 }
 
 div#editAdmin {
  
     width: 101%;
+}
+
+.form-row.design {
+    background: #f2f2f2;
 }
 
 @media screen and (max-width: 600px) {

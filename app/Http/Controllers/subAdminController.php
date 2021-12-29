@@ -53,15 +53,21 @@ class subAdminController extends Controller {
     // ----------------- ['update User] ------------------
     public function updateUser( Request $request ) {
         try {   
+            $fname= $request->firstname;
+            $lname = $request->lastusername;
+            
+            $mergename = $fname . " " .$lname;
+           
              $updateRoleData = DB::select( " UPDATE userrole
-                 SET firstName = '$request->firstname $request->lastusername',
+                 SET firstName = '$mergename',
                      lastName = '$request->lastusername',
                      contact = '$request->contact',
                      email = '$request->email',
                      password = '$request->password',
                      role = '$request->userrole' WHERE id = '$request->userID' ");
+             
                      return response()->json( [ 'updateRoleData' => $updateRoleData ] );
-              
+
          } catch ( \Exception $e ) {
             return Response()->json( [
                 'success' => false,

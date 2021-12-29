@@ -33,11 +33,18 @@ $(document).ready(function () {
     // ----------------------  [ user Role ] ----------------------
     $('#Mybtn').click(function () {
         $('#animateTable').animate({ width: "50%" });
+        // $("#Mybtn").load(location.href + " #userroleForm");
         $('#MyForm').show();
-        $("input:text").val("");
+        $("#first-name").val("");
+        $("#last-name").val("");
         $("#contact").val("");
+        $("#password").val("");
         $("#email").val("");
+        $("#userID").val("");
         $("#userRole").val("selectrole");
+        setTimeout(function() {
+            window.location.reload();
+       },1000000000);
     });
 
     //  ------------------- [ user back ] -------------------------
@@ -290,12 +297,13 @@ $(document).ready(function () {
                     dataType: "json",
                     data: data,
                     success: function (data) {
-                            $("#saveRoleData")[0].reset(); 
+                            // $("#saveRoleData")[0].reset(); 
                             $('#animateTable').animate({ width: "100%" });
                             $('#data-table').DataTable().ajax.reload();
                             $('#MyForm').hide();
                             $('.setpostion').hide();
-                            $('#emails').val('');
+                            // $('#emails').val('');
+                            $("#addroleuser").load(location.href + " #addroleuser");
                             toastr.options =
                             {
                                 "closeButton" : true,
@@ -345,6 +353,10 @@ $(document).ready(function () {
             }
         });
     });
+
+
+
+    
     // ---------------------------- ['  End For Document Class '] ---------------------------
 });
 
