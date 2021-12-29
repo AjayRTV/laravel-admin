@@ -4,6 +4,11 @@ $(document).ready(function() {
     });
 });
 
+// $("#admin-table").on('click', 'td', function (){
+//     $("#hideform").toggle();
+// });
+
+
 $(document).ready(function(){
    var table = $('#admin-table').DataTable({
         ajax: "admindata",
