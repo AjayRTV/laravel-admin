@@ -110,17 +110,15 @@ span#User_Back {
     margin-left: 6%;
 }
 
- 
-
-  /* Extra small devices (phones, 600px and down) */
+/* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
     .setpostion{
             margin-top: -166%!important;    
     }
 
     /* input[type="search"] {
-    width: 53%;
-} */
+        width: 53%;
+    } */
      
     @media only screen and (max-width: 600px){
         div.stickyform {
