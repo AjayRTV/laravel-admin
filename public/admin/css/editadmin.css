@@ -1,0 +1,22 @@
+div#admineditform {
+    margin-top: -5%;
+    
+}
+form#form1 {
+    
+    border: 0;
+    
+}
+
+div#hidetable {
+    /* margin-left: -193px; */
+    padding-right: -1%;
+    margin-left: -97%;
+}
+                        
+@media screen and (max-width: 600px) {
+    .userroleForm {
+      width: 100%;
+      margin-top: 0;
+    }
+  }
